@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ErrorHandler } from '@angular/core';
 import { ContactService } from './contact.service';
 import { Contact } from '../model/Contact';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -18,7 +18,7 @@ export class ContactComponent implements OnInit {
   ngOnInit() {
     this.contactService.getContacts().subscribe(
       data => this.Contacts = data,
-      error => this.handleError(),
+      error => this.handleError(error),
     );
   }
 
@@ -44,8 +44,8 @@ export class ContactComponent implements OnInit {
     this.contactService.deleteContact(id);
   }
 
-  handleError() {
-    throw new Error("Method not implemented.");
+  handleError(error) {
+    console.error('Some error occured : ', error);
   }
 }
 
