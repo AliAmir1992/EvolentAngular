@@ -15,17 +15,11 @@ This is an application for maintaining Contact information. We can perform add/u
 ## Folder structure for the aplication
 
 |-- app
-
 	|-- contact 						 // files related to Contact component and its template
-	
 		|-- contact.component.html 		 // contains html for oprations related to contact management
-
 		|-- contact.component.spec.ts 	 // unit test files for contact component
-
 		|-- contact.component.ts 		 // defines class for contact component
-
 		|-- contact.service.ts 			 // service calls for performing read/write oprations on contact.
-		
 	|-- shared
 		|-- modal-content.component.html // defines html for modal window used in application.
 		|-- modal-content.component.ts	 // defines component class for modal window.	
