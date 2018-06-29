@@ -11,18 +11,22 @@ import { Contact } from "../model/Contact";
 
 export class ModalContentComponent implements OnInit {
     EMAIL_REGEXP = /^\s*[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)\s*$/i;
-    closeBtnName: string;
+    title: string;
+    operation: string;
     myForm: FormGroup;
     firstName: FormControl;
     lastName: FormControl;
     email: FormControl;
     phoneNo: FormControl;
     status: FormControl;
-    title: string;
+    contact : Contact;
     statusList = ["Active", "InActive"]
     constructor(public bsModalRef: BsModalRef, private dataService : ContactService) { }
 
     ngOnInit() {
+        
+        this.operation == "add" ? this.contact = new Contact() : this.contact = this.dataService.inEditContact;
+
         this.firstName = new FormControl('', [
             Validators.required,
             Validators.pattern("[a-zA-Z][a-zA-Z\\s]+$")
@@ -49,13 +53,8 @@ export class ModalContentComponent implements OnInit {
         });
     }
     saveContact(){
-        let newContact = new Contact(this.firstName.value, this.lastName.value, this.email.value, this.phoneNo.value, this.status.value);
-        newContact.firstName = this.firstName.value;
-        newContact.lastName = this.lastName.value;
-        newContact.email = this.email.value;
-        newContact.phoneNo = this.phoneNo.value;
-        newContact.status = this.status.value;
         this.bsModalRef.hide();
-        this.dataService.addContact(newContact);
+        this.contact.status = this.status.value == "Active" ? true : false;
+        this.operation == "add" ? this.dataService.addContact(this.contact) : this.dataService.editContact(this.contact);
     }
 }

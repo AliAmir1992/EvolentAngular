@@ -11,7 +11,7 @@
             <input type="text" class="form-control" [ngClass]="{
                 'is-invalid': firstName.invalid && (firstName.dirty || firstName.touched),
                 'is-valid': firstName.valid && (firstName.dirty || firstName.touched)
-              }" formControlName="firstName">
+              }" formControlName="firstName" [(ngModel)]="contact.firstName">
             <div class="form-control-feedback text-danger" *ngIf="firstName.errors && (firstName.dirty || firstName.touched)">
                 <p *ngIf="firstName.errors.required">First Name is required</p>
                 <p *ngIf="firstName.errors.pattern">First name should only contain characters</p>
@@ -23,7 +23,7 @@
             <input type="text" class="form-control" [ngClass]="{
                 'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched),
                 'is-valid': lastName.valid && (lastName.dirty || lastName.touched)
-              }" formControlName="lastName">
+              }" formControlName="lastName" [(ngModel)]="contact.lastName">
             <div class="form-control-feedback text-danger" *ngIf="lastName.errors && (lastName.dirty || lastName.touched)">
                 <p *ngIf="lastName.errors.required">Last Name is required</p>
                 <p *ngIf="lastName.errors.pattern">Last name should only contain characters</p>
@@ -34,7 +34,7 @@
             <label>Email</label>
             <input type="email" placeholder="xyz@example.com" class="form-control" formControlName="email" required [ngClass]="{
                 'is-invalid': email.invalid && (email.dirty || email.touched),
-                'is-valid': email.valid && (email.dirty || email.touched)}">
+                'is-valid': email.valid && (email.dirty || email.touched)}" [(ngModel)]="contact.email">
             <div class="form-control-feedback text-danger" *ngIf="email.errors && (email.dirty || email.touched)">
                 <p *ngIf="email.errors.required">Email is required</p>
                 <p *ngIf="email.errors.pattern">Enter a valid Email Address</p>
@@ -46,7 +46,7 @@
             <input type="phoneNo" class="form-control" [ngClass]="{
                 'is-invalid': phoneNo.invalid && (phoneNo.dirty || phoneNo.touched),
                 'is-valid': phoneNo.valid && (phoneNo.dirty || phoneNo.touched)
-           }" formControlName="phoneNo">
+           }" formControlName="phoneNo" [(ngModel)]="contact.phoneNo">
             <div class="form-control-feedback text-danger" *ngIf="phoneNo.errors && (phoneNo.dirty || phoneNo.touched)">
                 <p *ngIf="phoneNo.errors.required text-danger">Phone No is required</p>
                 <p *ngIf="phoneNo.errors.pattern">Enter a valid 10 digit Phone no</p>

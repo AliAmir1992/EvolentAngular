@@ -7,35 +7,45 @@ import { ModalContentComponent } from '../_shared/modal-content.component';
 
 @Component({
   selector: 'app-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.css']
+  templateUrl: './contact.component.html'
 })
 export class ContactComponent implements OnInit {
-  bsModalRef: BsModalRef;
-  constructor(private contactService : ContactService, private modalService: BsModalService) { }
 
+  bsModalRef: BsModalRef;
   Contacts : Contact[];
+
+  constructor(private contactService : ContactService, private modalService: BsModalService) { }
   ngOnInit() {
-    this.Contacts = this.contactService.getContacts();
+    this.contactService.getContacts().subscribe(
+      data => this.Contacts = data,
+      error => this.handleError(),
+    );
   }
+
   openAddModal() {
     const initialState = {
       title: 'Add Contact',
-      method : 'add'
+      operation : 'add'
     };
     this.bsModalRef = this.modalService.show(ModalContentComponent, {initialState});
     this.bsModalRef.content.modalType = 'add';
   }
-  // openEditModal(contact : Contact) {
-  //   const initialState = {
-  //     contact : contact,
-  //     title: 'Edit Contact',
-  //     method : 'edit'
-  //   };
-  //   this.bsModalRef = this.modalService.show(ModalContentComponent, {initialState});
-  // }
+
+  openEditModal(contact : Contact) {
+    this.contactService.inEditContactDetails(contact);
+    const initialState = {
+      title: 'Edit Contact',
+      operation : 'edit'
+    };
+    this.bsModalRef = this.modalService.show(ModalContentComponent, {initialState});
+  }
+
   deleteContact(id : number){
     this.contactService.deleteContact(id);
+  }
+
+  handleError() {
+    throw new Error("Method not implemented.");
   }
 }
 
