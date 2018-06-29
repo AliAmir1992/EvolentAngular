@@ -18,6 +18,7 @@ export class ModalContentComponent implements OnInit {
     email: FormControl;
     phoneNo: FormControl;
     status: FormControl;
+    title: string;
     statusList = ["Active", "InActive"]
     constructor(public bsModalRef: BsModalRef, private dataService : ContactService) { }
 
